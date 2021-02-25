@@ -1,6 +1,5 @@
 
-public class Bat2
-{
+public class Bat2{
     public boolean groupSum(int start, int[] nums, int target) { //base
         boolean add;
         boolean add_not = false;
