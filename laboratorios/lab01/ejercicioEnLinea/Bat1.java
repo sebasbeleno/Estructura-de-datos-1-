@@ -44,7 +44,7 @@ public class Bat1{
     }
     //we get
     // T(n) = c1 + c2 + c0 if n = 0
-    // T(n) = T(n-1) + T(n-1) + c5 = c6*2**(n-1)
+    // T(n) = T(n-1) + T(n-1) + c5 = c5*((2**n) -1) + c6*2**n-1
     //then
     //T(n) = O(2**n) with n = bunnies  
 
@@ -111,7 +111,7 @@ public class Bat1{
         return fibonacci(n -1) + fibonacci(n - 2); // c3 + T(n-1) + T(n-2)
     }
     //we get
-    // solved in guideline --> c8*2**n + c9
-    // T(n) = c8*2**n + c9 O(2**n)
-
-}
+    // T(m) = c0 + c1 + c2, if n <=1
+    // T(m) = c3 + T(m-1) + T(m-2) = T(n) = c3*2**m + c4
+    //then
+    //T(m) = O(2**m) with m being the number of digits of n  
