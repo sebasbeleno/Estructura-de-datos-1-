@@ -50,8 +50,9 @@ def lcsAux(X, Y, m, n):
 def lcs(str1, str2): 
     return lcsAux(str1, str2, len(str1), len(str2)) #P(p) + c6
 
-#We get 
+#We get
 # T(p) = P(p) + c6
 # worst case
-#P(p) = c5 + P(p-1) + P(p-1)
+#P(p) = c5 + P(p-1) + P(p-1) = c5*((2**p)-1) + c6*2**p-1
+#Then T(p) = O(2**p)
 #With p being the sum of the lenght of the two strings
