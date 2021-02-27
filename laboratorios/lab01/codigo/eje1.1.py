@@ -54,4 +54,4 @@ def lcs(str1, str2):
 # T(p) = P(p) + c6
 # worst case
 #P(p) = c5 + P(p-1) + P(p-1)
-#With n being the lenght of s1 and m the lenght of s2
+#With p being the sum of the lenght of the two strings
