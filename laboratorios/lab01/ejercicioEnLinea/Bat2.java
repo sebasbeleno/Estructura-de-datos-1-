@@ -20,7 +20,7 @@ public class Bat2
     //we get
     // T(n) = c0 + c1 + c2 + c3 + c4 if n == 0
     //worst case:
-    // T(n) = T(n-1) + T(n-1) + ... = c10*2**n-1 + c11
+    // T(n) = T(n-1) + T(n-1) + C = C*((2**n)-1) + c11*2**n-1
     //then
     //T(n) = O(2**n) with n being the lenght of nums 
 
@@ -37,7 +37,7 @@ public class Bat2
     //we get
     // T(n) = c0 + c1 + c2 + c3 + c4 if n == 0
     //worst case:
-    // T(n) = T(n-2) + T(n-1) + ... = Fibbonachi = c8*2**n + c9
+    // T(n) = T(n-2) + T(n-1) + C = Fibbonachi = c8*2**n + c9
     //then
     //T(n) = O(2**n) with n being the lenght of nums 
 
@@ -64,7 +64,7 @@ public class Bat2
     //we get
     // T(n) = c0 + c1 + c2 + c3 + c4 if n == 0
     //worst case:
-    // T(n) = T(n-1) + T(n-1) + ... = c8*2**n-1 + c9
+    // T(n) = T(n-1) + T(n-1) + C = C*((2**n)-1) + c9*2**n-1
     //then
     //T(n) = O(2**n) with n being the lenght of nums 
 
@@ -92,7 +92,7 @@ public class Bat2
     //we get
     // T(n) = c0 + c1 + c2 + c3 + c4 if n == 0
     //worst case:
-    // T(n) = T(n-1) + T(n-1) + ... = c10*2**n-1 + c11
+    // T(n) = T(n-1) + T(n-1) + C = C*((2**n)-1) + c11*2**n-1
     //then
     //T(n) = O(2**n) with n being the lenght of nums 
 
@@ -106,9 +106,9 @@ public class Bat2
     //we get
     //T(n) = P(n) + c1 + c0 + c10 + c11 + c12 if n == 0
     //worst case:
-    // T(n) = P(n) + c1 + G(n) + c4 +... = c8*n + c9 + c1 + c17*2**n-1 + c18 + c4 + ....
+    // T(n) = P(n) + c1 + G(n) + c4 + C = c8*n + c9 + c1 + C*((2**n)-1) + c18*2**n-1 + c18 + c4 + C
     //then
-    //P(n) = O(2**n) with n being the lenght of nums 
+    //T(n) = O(2**n) with n being the lenght of nums 
 
     public int sumArray(int[] nums, int pos){ // Aux excercise 5 c5
         if(pos <= 0){ //c5
@@ -135,7 +135,7 @@ public class Bat2
     //we get
     //G(n) = c10 + c11 + c12 + c13 if n == 0
     //worst case:
-    // G(n) = G(n-1) + G(n-1)+ ... = c17*2**n-1 + c18
+    // G(n) = G(n-1) + G(n-1)+ C = C*((2**n)-1) + c18*2**n-1
     //then
     //G(n) = O(2**n) with n being the lenght of nums 
 }
