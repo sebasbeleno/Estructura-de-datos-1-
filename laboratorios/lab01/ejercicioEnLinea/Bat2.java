@@ -22,7 +22,7 @@ public class Bat2
     //worst case:
     // T(n) = T(n-1) + T(n-1) + C = C*((2**n)-1) + c11*2**n-1
     //then
-    //T(n) = O(2**n) with n being the lenght of nums 
+    //T(n) = O(2**n) with n being the length of nums 
 
     public boolean groupNoAdj(int start, int[] nums, int target)  { //excersie 2 c0
         boolean add; //c1
@@ -39,7 +39,7 @@ public class Bat2
     //worst case:
     // T(n) = T(n-2) + T(n-1) + C = Fibbonachi = c8*2**n + c9
     //then
-    //T(n) = O(2**n) with n being the lenght of nums 
+    //T(n) = O(2**n) with n being the length of nums 
 
     public boolean groupSum5(int start, int[] nums, int target) { //excersie 3 //c0
         boolean add = false; //c1
@@ -66,7 +66,7 @@ public class Bat2
     //worst case:
     // T(n) = T(n-1) + T(n-1) + C = C*((2**n)-1) + c9*2**n-1
     //then
-    //T(n) = O(2**n) with n being the lenght of nums 
+    //T(n) = O(2**n) with n being the length of nums 
 
     public boolean groupSumClump(int start, int[] nums, int target) { //excersie 4 c0
         boolean add = false; //c1
@@ -94,7 +94,7 @@ public class Bat2
     //worst case:
     // T(n) = T(n-1) + T(n-1) + C = C*((2**n)-1) + c11*2**n-1
     //then
-    //T(n) = O(2**n) with n being the lenght of nums 
+    //T(n) = O(2**n) with n being the length of nums 
 
     public boolean splitArray(int[] nums) { //excercise 5 //c0
         int n = sumArray(nums,nums.length); //P(n) + c1
@@ -108,7 +108,7 @@ public class Bat2
     //worst case:
     // T(n) = P(n) + c1 + G(n) + c4 + C = c8*n + c9 + c1 + C*((2**n)-1) + c18*2**n-1 + c18 + c4 + C
     //then
-    //T(n) = O(2**n) with n being the lenght of nums 
+    //T(n) = O(2**n) with n being the length of nums 
 
     public int sumArray(int[] nums, int pos){ // Aux excercise 5 c5
         if(pos <= 0){ //c5
@@ -121,7 +121,7 @@ public class Bat2
     //worst case:
     // P(n) = P(n-1) + c8 = c8*n + c9
     //then
-    //P(n) = O(n) with n being the lenght of nums 
+    //P(n) = O(n) with n being the length of nums 
     public boolean groupSum(int start, int[] nums, int target) { //Aux excercise 5
         boolean add; //c10
         boolean add_not = false; //c11
@@ -137,6 +137,6 @@ public class Bat2
     //worst case:
     // G(n) = G(n-1) + G(n-1)+ C = C*((2**n)-1) + c18*2**n-1
     //then
-    //G(n) = O(2**n) with n being the lenght of nums 
+    //G(n) = O(2**n) with n being the length of nums 
 }
 
