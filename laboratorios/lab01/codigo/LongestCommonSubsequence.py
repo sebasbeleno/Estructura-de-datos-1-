@@ -31,28 +31,20 @@ print(subCadenaMax(input(), input()))
 
 #----------------------------------------------------------#
 
-"""
-Title: Python Program for Longest Common Subsequence
-Author: contributed by multiple authors from GeeksforGeeks
-Date: 18 Apr, 2020
-Code version: last updated in 18 Apr, 2020
-Availability: https://www.geeksforgeeks.org/python-program-for-longest-common-subsequence/
-"""
-def lcsAux(X, Y, m, n): 
-  
-    if m == 0 or n == 0: #c1
-       return 0; #c2
-    elif X[m-1] == Y[n-1]: #c3
-       return 1 + lcsAux(X, Y, m-1, n-1); #c4 + P(p-2)
-    else: #c5
-       return max(lcsAux(X, Y, m, n-1), lcsAux(X, Y, m-1, n)); # c5 + P(p-1) + P(p-1)
+import random, string
 
-def lcs(str1, str2): 
-    return lcsAux(str1, str2, len(str1), len(str2)) #P(p) + c6
+def lcs(i, j, x, y):
+    if(i<0 or j<0):#c0
+        return -1 #c1
+    if(x[i:i+1] == y[j:j+1]): #c2
+        return lcs(i-1, j-1, x, y) + 1 #T(p-2)
+    return max(lcs(i-1, j, x, y), lcs(i, j-1, x, y)) #T(p-1) + T(p-1)
+#we get 
+#Worst case:
+# T(p) = T(p-1) + T(p-1) + c3 =  c3((2**p)-1) + c4*2**p-1
+#then
+#T(p) = O(2**p) with p being the sum of the length of the two strings
 
-#We get
-# T(p) = P(p) + c6
-# worst case
-#P(p) = c5 + P(p-1) + P(p-1) = c5*((2**p)-1) + c6*2**p-1
-#Then T(p) = O(2**p)
-#With p being the sum of the lenght of the two strings
+x ="ABCD"
+y ="ABCD"
+#print(lcs(len(x),len(y),x,y))
