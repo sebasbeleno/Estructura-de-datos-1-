@@ -1,3 +1,4 @@
+package Taller__6;
 import java.util.Arrays;
 /**
  * La clase MiArrayList tiene la intención de representar un objeto que simule el comportamiento
