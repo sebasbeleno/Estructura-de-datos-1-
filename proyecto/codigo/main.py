@@ -1,46 +1,75 @@
 import os 
 import csv
+from save_image import save_image
+from image_compression import scaling, average, nearest_neighbors
+from image_decompression import linear_interpolation
 
 """
 Put here you folder path
 """
-path = "C:/Users/Usuario/Desktop/Universidad/ST0245-Eafit/proyecto/datasets/archivosCSV"
+path = "D:/Universidad/ST0245-Eafit/proyecto/datasets/archivosCSV"
+        
 os.chdir(path)
 
-def image_compression(image_data):
-    pass
+sizes = []
 
-for root, subDirs, files in os.walk("."):
+
+def reader():
     
-    """
-       We read each folder saved in a CSV archive 
-    """
-    for subDir in subDirs:
-        """
-           For each subDirectory we create a path where we can save all the archives.
-           Aditionally we change the path created in os for later reading if the CSV archives in it recorded.
-        """
-        new_path = path+'/'+subDir
-        os.chdir(new_path)
+    for root, subDirs, files in os.walk("."):
         
         """
-        We iterate the subDirectory previously mentioned and get the anrchives in it.
+        We read each folder saved in a CSV archive 
         """
-        for a,b,c in os.walk("."):
+        for subDir in subDirs:
             """
-            For each archive found we create am absolute path for later reading.
+            For each subDirectory we create a path where we can save all the archives.
+            Aditionally we change the path created in os for later reading if the CSV archives in it recorded.
             """
-            for file_data in c:
-                file_path = os.path.abspath(file_data)
-                
-                with open(file_path, 'r') as csv_file:
-                    reader = csv.reader(csv_file, delimiter=",")
-                    """
-                    Once read the archive, we save it inside or data structure.
-                    """
-                    for data in reader:
-                        image_compression(data)
+            new_path = path+'/'+subDir
+            os.chdir(new_path)
+
+            
+            """
+            We iterate the subDirectory previously mentioned and get the anrchives in it.
+            """
+            for a,b,c in os.walk("."):
+                """
+                For each archive found we create am absolute path for later reading.
+                """
+                os.chdir(new_path)
+
+                for file_data in c:
+                    os.chdir(new_path)
+                    file_path = os.path.abspath(file_data)
+                 
+                    with open(file_path, 'r') as csv_file:
+                        reader = csv.reader(csv_file, delimiter=",")
+                        """
+                        Once read the archive, we save it inside or data structure.
+                        """
+                        data = []
+                        for row in reader:
+                            data.append(row)
+                            
+                        filename = os.path.basename(file_path)
+                        imagename = filename.split('.')[0]
                         
+                            
+                        save_image(data, "original", imagename)
+                        #save_image(linear_interpolation(data), "linear-scaling-3x", imagename)
+                        #save_image(nearest_neighbors(data), "nearest_neighbors", imagename) 
+                        save_image(average(data), "interpolation-without-scaling", imagename)
+                        save_image(scaling(data), "interpolation-with-scaling", imagename)
+                    
+                        #tecla = input("Pulsa cualquier tecla para procesar la siguiente imagen")
+
+if __name__ == '__main__':
+    reader()
+
+    print(sizes)
+    
+
 """
     __
 ___( o)>
