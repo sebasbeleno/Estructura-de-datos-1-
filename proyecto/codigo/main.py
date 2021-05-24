@@ -1,8 +1,11 @@
 import os 
 import csv
+from typing import Literal
 from save_image import save_image
 from image_compression import scaling, average, nearest_neighbors
 from image_decompression import linear_interpolation
+from lossless import lossless, dicompress
+from save_compressed import save_compressed
 
 """
 Put here you folder path
@@ -57,10 +60,19 @@ def reader():
                         
                             
                         save_image(data, "original", imagename)
+                        
+                        losslyImageCompressed = average(data)
+                        losslyImageCompressed = losslyImageCompressed.tolist()
+                        losslessImageCompressed = lossless(losslyImageCompressed)
+                        save_compressed(losslessImageCompressed, "Burro", imagename)
+
+                        losslessImageCompressed = eval(losslessImageCompressed)
+                        dicompressImage = dicompress(losslessImageCompressed)
+                        save_image(dicompressImage, "Burro", imagename)
                         #save_image(linear_interpolation(data), "linear-scaling-3x", imagename)
                         #save_image(nearest_neighbors(data), "nearest_neighbors", imagename) 
-                        save_image(average(data), "interpolation-without-scaling", imagename)
-                        save_image(scaling(data), "interpolation-with-scaling", imagename)
+                        #save_image(average(data), "interpolation-without-scaling", imagename)
+                        #save_image(scaling(data), "interpolation-with-scaling", imagename)
                     
                         #tecla = input("Pulsa cualquier tecla para procesar la siguiente imagen")
 
