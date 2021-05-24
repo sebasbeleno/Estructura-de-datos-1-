@@ -1,147 +1,112 @@
-def burro(image):
-    iter = []
+def burro(image): #c
+    iter = [] #c
 
-    image.append(-1)
+    image.append(-1) #c
 
-    for i in range(len(image)):
-        iter_int = [image[-1]] + image[:-1]
-        iter.append(iter_int)
-        image = iter_int 
+    for i in range(len(image)): #n
+        iter_int = [image[-1]] + image[:-1] #n**2
+        iter.append(iter_int) #n
+        image = iter_int #n
 
-    answer = []
+    answer = [] #c
 
-    iter.sort()
-    for inter_int in iter:
-        answer.append(inter_int[-1])
+    iter.sort() #nlogn
+    for inter_int in iter: #n
+        answer.append(inter_int[-1]) #n
 
 
-    return answer
+    return answer #c
+#Luego la complejidad de burro() es n**2, con n la longitud de la lista image
 
-def rle(b, dim = None):
-    n = len(b)
-    res = []
-    i = 0
-    if (dim != None):
-        res.append(str(dim) + ".")
-    while (i < n-1):
-        res.append(str(b[i])+",")
-        count = 1
-        while(i < n-1 and b[i] == b[i + 1]):
-            count = count + 1 
-            i = i + 1
-        res.append(str(count)+",")
-        i = i +1
+def rle(b, dim = None): # c
+    n = len(b) # c
+    res = [] # c
+    i = 0 # c
+    if (dim != None): # c
+        res.append(str(dim) + ".") # c
+    while (i < n-1): # n
+        res.append(str(b[i])+",") # n
+        count = 1 # n
+        while(i < n-1 and b[i] == b[i + 1]): # Es dependiente de i luego continua siendo n
+            count = count + 1 #n
+            i = i + 1 #n
+        res.append(str(count)+",") #n
+        i = i +1 # n
 
-    return "".join(res)[:-1]
-
-def inverseRle(string): 
-    res = []
-    lista = string.split(",")
-    n = len(lista)
-    i = 0
-    while(i < n -1):
-        res = res + [lista[i]]*int(lista[i+1])
-        i = i + 2
+    return "".join(res)[:-1] # c
+#luego la complejidad de rle es n, con n la longitud de la lista b
+def inverseRle(string): # c
+    res = [] # c
+    lista = string.split(",") # c
+    n = len(lista) #c
+    i = 0 # c
+    while(i < n -1): #n
+        res = res + [lista[i]]*int(lista[i+1]) #n
+        i = i + 2 #n
     
-    return res
+    return res #n
+#Luego la complejidad de inverseRle es n, con n la longitud de la string descomprimida
 
-def antiBurro(B):
+def antiBurro(B): #c
     
     #Indexar los caracteres de la ultima fila fin
-    fin = [(B[i], i) for i in range(len(B))]
+    fin = [(B[i], i) for i in range(len(B))] # n
     #print("fin es ", fin)
 
     #Obtener la primera columna inicio
-    inicio = sorted(fin)
+    inicio = sorted(fin) # nlogn
     #print("inicio es ", inicio)
 
     #Generar la lista ciclo que representa el circulo de iteracion
-    ciclo = []
+    ciclo = [] #c
 
     #Agregar -1 a ciclo sin index
-    ciclo.append(inicio[0][0])
+    ciclo.append(inicio[0][0]) #c
     #print("ciclo es ", ciclo)
 
     #Definir -1 como el caracter actual
-    actual = inicio[0]
+    actual = inicio[0] #c
     #print("actual es ", actual)
 
-    while(len(ciclo) < len(B)):
+    while(len(ciclo) < len(B)): #n
 
         #Encontrar el index de actual en fin
-        indexActualFin = actual[1]
+        indexActualFin = actual[1]#n
 
         #Encontrar el caracter anterior 
-        anterior = inicio[indexActualFin]
+        anterior = inicio[indexActualFin] #n
         #print("anterior es ", anterior)
 
         #Agregar anterior a respuesta sin index
-        ciclo.append(anterior[0])
+        ciclo.append(anterior[0]) #n
         #print("ciclo es ", ciclo)
 
         #definir anterior como actual
-        actual = anterior
+        actual = anterior #n
         #print("actual es ", actual)
 
-    return ciclo[1:]
+    return ciclo[1:] #c
+#Luego la complejidad de antiBurro es n, con n la longitud de B
 
-def antiBurro(B):
-    
-    #Indexar los caracteres de la ultima fila fin
-    fin = [(B[i], i) for i in range(len(B))]
-    #print("fin es ", fin)
 
-    #Obtener la primera columna inicio
-    inicio = sorted(fin)
-    #print("inicio es ", inicio)
+def lossless(image): #c
 
-    #Generar la lista ciclo que representa el circulo de iteracion
-    ciclo = []
+    ans = [] #c
+    for col in image: #n
+        col = burro(col) #n*m**2
+        col = rle(col) #n*m
+        ans += [col] #n
 
-    #Agregar -1 a ciclo sin index
-    ciclo.append(inicio[0][0])
-    #print("ciclo es ", ciclo)
+    return str(ans) #c
+#Luego la complejidad de lossless es n*m**2, con n el numero de filas y m el numero de columnas
+def dicompress(image): #c
 
-    #Definir -1 como el caracter actual
-    actual = inicio[0]
-    #print("actual es ", actual)
+    ans = [] #c
 
-    while(len(ciclo) < len(B)):
-
-        #Encontrar el index de actual en fin
-        indexActualFin = actual[1]
-
-        #Encontrar el caracter anterior 
-        anterior = inicio[indexActualFin]
-        #print("anterior es ", anterior)
-
-        #Agregar anterior a respuesta sin index
-        ciclo.append(anterior[0])
-        #print("ciclo es ", ciclo)
-
-        #definir anterior como actual
-        actual = anterior
-        #print("actual es ", actual)
-
-    return ciclo[1:]
-
-def lossless(image):
-
-    ans = []
-    for col in image:
-        col = burro(col)
-        col = rle(col)
-        ans += [col]
-
-    return str(ans) 
-
-def dicompress(image):
-
-    ans = []
-
-    for col in image:
-        col = inverseRle(col)
-        col = antiBurro(col)
-        ans.append(col)
-    
-    return ans
+    for col in image: #n
+        col = inverseRle(col) #n*m
+        col = antiBurro(col) #n*m
+        ans.append(col)#n
+  
+    return ans #c
+#Luego la complejidad de dicompress es n*m, con n el numero de filas y m el numero de columnas
