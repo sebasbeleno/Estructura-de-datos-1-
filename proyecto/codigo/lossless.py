@@ -10,13 +10,13 @@ def burro(image): #c
 
     answer = [] #c
 
-    iter.sort() #nlogn
+    iter.sort() #n**2 * logn
     for inter_int in iter: #n
         answer.append(inter_int[-1]) #n
 
 
     return answer #c
-#Luego la complejidad de burro() es n**2, con n la longitud de la lista image
+#Luego la complejidad de burro() es n**2 * logn, con n la longitud de la lista image
 
 def rle(b, dim = None): # c
     n = len(b) # c
@@ -93,12 +93,12 @@ def lossless(image): #c
 
     ans = [] #c
     for col in image: #n
-        col = burro(col) #n*m**2
+        col = burro(col) #n*m**2 * logm
         col = rle(col) #n*m
         ans += [col] #n
 
     return str(ans) #c
-#Luego la complejidad de lossless es n*m**2, con n el numero de filas y m el numero de columnas
+#Luego la complejidad de lossless es n* m**2 * logm, con n el numero de filas y m el numero de columnas
 def dicompress(image): #c
 
     ans = [] #c
