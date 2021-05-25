@@ -6,6 +6,7 @@ from image_compression import scaling, average, nearest_neighbors
 from image_decompression import linear_interpolation
 from lossless import lossless, dicompress
 from save_compressed import save_compressed
+import time
 
 """
 Put here you folder path
@@ -16,7 +17,7 @@ os.chdir(path)
 
 sizes = []
 
-
+all_times = []
 def reader():
     
     for root, subDirs, files in os.walk("."):
@@ -58,17 +59,41 @@ def reader():
                         filename = os.path.basename(file_path)
                         imagename = filename.split('.')[0]
                         
-                            
+                        #Save the original image
                         save_image(data, "original", imagename)
-                        
+                        save_compressed(data, "original", imagename)
+                        #Apply lossy compression method
                         losslyImageCompressed = average(data)
+                        
+                        #Save image comprred
+                        #save_image(losslyImageCompressed, "linal-interpolation", imagename)
+                        
+                        start_time  = time.time()
+                        #Conver numpyArray to "native" list
                         losslyImageCompressed = losslyImageCompressed.tolist()
+                        
+                        #Save .txt image of data from the image
+                        save_compressed(losslyImageCompressed, "Avere", imagename)
+                        
+                        #Apply lossless compress method
                         losslessImageCompressed = lossless(losslyImageCompressed)
+                        
+                        time_taken =  (time.time() - start_time)
+                        print(str(time_taken), " seconds, for ", len(losslyImageCompressed), "px X", len(losslyImageCompressed[0]), "px")
+                        
+                        #Save .txt of image compresed by lossless method
                         save_compressed(losslessImageCompressed, "Burro", imagename)
 
-                        losslessImageCompressed = eval(losslessImageCompressed)
+                        #Decompress the image from Burrow method 
                         dicompressImage = dicompress(losslessImageCompressed)
-                        save_image(dicompressImage, "Burro", imagename)
+
+                        all_times.append(time_taken)
+                        #Save the .txt whit decompress result to compare and evalue
+                        save_compressed(dicompressImage, "Di-Compress", imagename)
+
+                        #Save the image with the result
+                        save_image(dicompressImage, "Dicompressed", imagename)
+                        
                         #save_image(linear_interpolation(data), "linear-scaling-3x", imagename)
                         #save_image(nearest_neighbors(data), "nearest_neighbors", imagename) 
                         #save_image(average(data), "interpolation-without-scaling", imagename)
@@ -80,6 +105,8 @@ if __name__ == '__main__':
     reader()
 
     print(sizes)
+
+    print(sum(all_times) / len(all_times))
     
 
 """

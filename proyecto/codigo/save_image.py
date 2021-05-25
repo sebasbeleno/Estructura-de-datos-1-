@@ -16,12 +16,11 @@ def save_image(image_data, method, name):
     py = len(image_data[0])
     px = len(image_data)
 
-    #print(image_data)
+    #print(image_data[0])
         
-    pixels = np.array(image_data)
-    #pixels = pixels.reshape((px, py))
+    pixels = np.array(image_data, dtype='uint8')
+    pixels = pixels.reshape((px, py))
     
-    print(pixels)
     path = create_directory(name)
     image_path = os.path.join(path, image_name)
     csv_path = os.path.join(path, csv_name)

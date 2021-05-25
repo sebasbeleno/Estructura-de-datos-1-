@@ -2,6 +2,7 @@ import os
 
 def save_compressed(image_data, method, name):
 
+    image_data  = str(image_data)
     file_name = '{}-{}.txt'.format(name, method)
 
     path = create_directory(name)
