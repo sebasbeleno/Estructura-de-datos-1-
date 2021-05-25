@@ -45,29 +45,23 @@ def inverseRle(string):
     return res
 
 
-def antiBurro(B):
-    
-    #Indexar los caracteres de la ultima fila fin
-    fin = [(B[i], i) for i in range(len(B))]
-    #print("fin es ", fin)
 
-    #Obtener la primera columna inicio
-    inicio = sorted(fin)
-    #print("inicio es ", inicio)
+def lossless(image): #c
 
-    #Generar la lista ciclo que representa el circulo de iteracion
-    ciclo = []
+    ans = [] #c
+    for col in image: #n
+        col = burro(col) #n*m**2 * logm
+        col = rle(col) #n*m
+        ans += [col] #n
 
-    #Agregar -1 a ciclo sin index
-    ciclo.append(inicio[0][0])
-    #print("ciclo es ", ciclo)
+    return str(ans) #c
+#Luego la complejidad de lossless es n* m**2 * logm, con n el numero de filas y m el numero de columnas
+def dicompress(image): #c
 
-    #Definir -1 como el caracter actual
-    actual = inicio[0]
-    #print("actual es ", actual)
+    ans = [] #c
 
     while(len(ciclo) < len(B)):
-
+    
         #Encontrar el index de actual en fin
         indexActualFin = actual[1]
 
